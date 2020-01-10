@@ -40,6 +40,10 @@ fragment CourseFields on Course{
   _id
   title
   description
+  people{
+    _id
+    name
+  }
 }
 ```
 
