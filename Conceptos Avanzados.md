@@ -46,4 +46,51 @@ fragment CourseFields on Course{
   }
 }
 ```
+#Las variables permiten extraer complejidad y datos de un mutation
+Variables
+```graphql
+mutation CreateNewCourse($createInput: CourseInput!){
+  createCourse(input: $createInput){
+    _id
+    title
+  }
+}
 
+#query variables
+{
+  "createInput": {
+    "title": "Mi Titulo 6",
+    "teacher": "Profesor 6",
+    "description": "Curso de ejemplo 6",
+    "topic": "programacion",
+    "level": "principiante"
+  }
+}
+```
+
+#Enum sirve para definir un tipo de dato con valores fijos
+Enum en schema.graphql
+```graphql
+"Valida los tipos de nivel"
+enum Level{
+  principiante
+  intermedio
+  avanzado
+}
+type Course {
+  _id: ID!
+  title: String!
+  teacher: String
+  description: String!
+  topic: String
+  people: [Student]
+  level: Level
+}
+input CourseInput {
+  title: String!
+  teacher: String
+  description: String!
+  topic: String 
+  level: Level
+}
+```
