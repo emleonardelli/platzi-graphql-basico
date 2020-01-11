@@ -117,3 +117,29 @@ query getPeopleData($monitor: Boolean!, $avatar: Boolean!){
   "avatar": true
 }
 ```
+
+#Union permite hacer una consulta incluyendo varios tipos de datos
+#Para esto debemos crear un indice en mongo
+```mongo
+db.courses.createIndex({"$**": "text"})
+db.students.createIndex({"$**": "text"})
+```
+```graphql
+{
+	searchItems(keyword: "1"){
+    __typename
+    ... on Course{
+      title
+      description
+    }
+    ... on Monitor{
+      name
+      phone
+    }
+    ... on Student{
+      name
+      email
+    }
+  }
+}
+```
