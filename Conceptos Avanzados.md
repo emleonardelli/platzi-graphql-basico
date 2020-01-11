@@ -94,3 +94,26 @@ input CourseInput {
   level: Level
 }
 ```
+
+#Directivas permite agregar condicionales para mostrar info o no
+```graphql
+query getPeopleData($monitor: Boolean!, $avatar: Boolean!){
+	getPeople{
+    _id
+    name
+  	... on Monitor @include(if: $monitor){
+      phone
+    }
+    ... on Student @include(if: $avatar){
+      avatar
+      email
+    }
+  }
+}
+
+//Query variables
+{
+  "monitor": true,
+  "avatar": true
+}
+```
